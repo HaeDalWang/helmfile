@@ -1,0 +1,113 @@
+repositories:
+# - name: ingress-nginx
+#   url: https://kubernetes.github.io/ingress-nginx
+# - name: rook-release
+#   url: https://charts.rook.io/release
+# - name: jenkins
+#   url: https://charts.jenkins.io
+- name: argo
+  url: https://argoproj.github.io/argo-helm
+# - name: harbor
+#   url: https://helm.goharbor.io
+# - name: bitnami
+#   url: https://charts.bitnami.com/bitnami
+# - name: fluent
+#   url: https://fluent.github.io/helm-charts
+# - name: prometheus-community
+#   url: https://prometheus-community.github.io/helm-charts
+# - name: enix
+#   url: https://charts.enix.io
+# - name: metrics-server
+#   url: https://kubernetes-sigs.github.io/metrics-server
+# - name: minio
+#   url: https://charts.min.io
+# - name: vmware-tanzu
+#   url: https://vmware-tanzu.github.io/helm-charts
+
+releases:
+# - name: ingress-nginx
+#   namespace: ingress-nginx
+#   chart: ingress-nginx/ingress-nginx
+#   version: 4.6.0
+#   values:
+#   - values/ingress-nginx.yaml
+# - name: rook-ceph
+#   namespace: rook-ceph
+#   chart: rook-release/rook-ceph
+#   version: v1.11.2
+#   values:
+#   - values/rook-ceph.yaml
+# - name: rook-ceph-cluster
+#   namespace: rook-ceph
+#   chart: rook-release/rook-ceph-cluster
+#   version: v1.11.2
+#   values:
+#   - values/rook-ceph-cluster.yaml
+#   needs:
+#   - ingress-nginx/ingress-nginx
+#   - rook-ceph
+# - name: jenkins
+#   namespace: jenkins
+#   chart: jenkins/jenkins
+#   version: 4.3.20
+#   values:
+#   - values/jenkins.yaml
+- name: argocd
+  namespace: argocd
+  chart: argo/argo-cd
+  version: 5.43.5
+  values:
+  - values/argocd.yaml
+# - name: harbor
+#   namespace: harbor
+#   chart: harbor/harbor
+#   version: 1.11.1
+#   values:
+#   - values/harbor.yaml
+# - name: elasticsearch
+#   namespace: elasticsearch
+#   chart: bitnami/elasticsearch
+#   version: 19.6.0
+#   values:
+#   - values/elasticsearch.yaml
+# - name: fluent-bit
+#   namespace: fluent-bit
+#   chart: fluent/fluent-bit
+#   version: 0.27.0
+#   values:
+#   - values/fluent-bit.yaml
+# - name: kube-prometheus-stack
+#   namespace: prometheus
+#   chart: prometheus-community/kube-prometheus-stack
+#   version: 45.8.0
+#   values:
+#   - values/kube-prometheus-stack.yaml
+# - name: x509-certificate-exporter
+#   namespace: x509-certificate-exporter
+#   chart: enix/x509-certificate-exporter
+#   version: 3.6.0
+# - name: metrics-server
+#   namespace: kube-system
+#   chart: metrics-server/metrics-server
+#   version: 3.10.0
+# - name: keycloak
+#   namespace: keycloak
+#   chart: bitnami/keycloak
+#   version: 14.2.0
+#   values:
+#   - values/keycloak.yaml
+# - name: minio
+#   namespace: minio
+#   chart: minio/minio
+#   version: 5.0.9
+#   values:
+#   - values/minio.yaml
+# - name: velero
+#   namespace: velero
+#   chart: vmware-tanzu/velero
+#   version: 4.0.2
+#   values:
+#   - values/velero.yaml
+
+helmDefaults:
+  createNamespace: true
