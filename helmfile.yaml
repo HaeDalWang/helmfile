@@ -3,8 +3,8 @@ repositories:
 #   url: https://kubernetes.github.io/ingress-nginx
 # - name: rook-release
 #   url: https://charts.rook.io/release
-# - name: jenkins
-#   url: https://charts.jenkins.io
+- name: jenkins
+  url: https://charts.jenkins.io
 - name: argo
   url: https://argoproj.github.io/argo-helm
 # - name: harbor
@@ -46,18 +46,18 @@ releases:
 #   needs:
 #   - ingress-nginx/ingress-nginx
 #   - rook-ceph
-# - name: jenkins
-#   namespace: jenkins
-#   chart: jenkins/jenkins
-#   version: 4.3.20
-#   values:
-#   - values/jenkins.yaml
-- name: argocd
-  namespace: argocd
-  chart: argo/argo-cd
-  version: 5.43.5
+- name: jenkins
+  namespace: jenkins
+  chart: jenkins/jenkins
+  version: 4.3.20
   values:
-  - values/argocd.yaml
+  - values/jenkins.yaml
+# - name: argocd
+#   namespace: argocd
+#   chart: argo/argo-cd
+#   version: 5.43.5
+#   values:
+#   - values/argocd.yaml
 # - name: harbor
 #   namespace: harbor
 #   chart: harbor/harbor

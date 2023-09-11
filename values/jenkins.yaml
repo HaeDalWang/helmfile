@@ -1,0 +1,60 @@
+controller:
+  ingress:
+    enabled: true
+    ingressClassName: alb
+    apiVersion: networking.k8s.io/v1
+    annotations:
+      alb.ingress.kubernetes.io/scheme: "internet-facing"
+      alb.ingress.kubernetes.io/target-type: "ip"
+      alb.ingress.kubernetes.io/listen-ports: "[{\"HTTP\": 80}, {\"HTTPS\": 443}]"
+      alb.ingress.kubernetes.io/backend-protocol: "HTTP"
+      alb.ingress.kubernetes.io/ssl-redirect: "443"
+      external-dns.alpha.kubernetes.io/hostname: jenkins.seungdobae.com
+    hostName: jenkins.seungdobae.com
+  admin:
+    passwordKey: "test1234"
+  jenkinsUrlProtocol: https
+
+  additionalPlugins:
+  - matrix-auth:3.1.6
+  - gitlab-branch-source:650.va_d1ce6d01959
+  - pipeline-utility-steps:2.15.1
+  - git-parameter:0.9.18
+  - pipeline-stage-view:2.32
+  - email-ext:2.96
+  - gitlab-plugin:1.7.12
+  - thinBackup:1.17
+  - kubernetes-cli:1.12.0
+
+persistence:
+  enabled: true
+  size: 20Gi
+  
+agent:
+  podTemplates:
+    podman: |
+      - name: jenkins-agent-podman
+        namespace: jenkins
+        label: jenkins-agent-podman
+        serviceAccount: jenkins
+        containers:
+        - name: podman
+          image: quay.io/containers/podman:v4.4.4
+          ttyEnabled: true
+          privileged: true
+          resourceRequestCpu: "100m"
+          resourceRequestMemory: "512Mi"
+          resourceLimitCpu: "4"
+          resourceLimitMemory: "8192Mi"
+    helm: |
+      - name: jenkins-agent-helm
+        namespace: jenkins
+        label: jenkins-agent-helm
+        serviceAccount: jenkins
+        containers:
+        - name: helm
+          image: alpine/helm:3.11.2
+          ttyEnabled: true
+          privileged: true
+          command: sleep
+          args: infinity
